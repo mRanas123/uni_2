@@ -1,1 +1,1 @@
-web: gunicorn FIX_IT_APP.wsgi --log-file -
+web: gunicorn Fix_it_app.wsgi --log-file -
