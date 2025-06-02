@@ -9,7 +9,8 @@ https://docs.djangoproject.com/en/5.2/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/5.2/ref/settings/
 """
-
+import dj_database_url
+import os
 from pathlib import Path
 import os
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -23,8 +24,8 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-6wye)a-_lk%l%_%3%r*c#6j%_ql^c5qws7tl#9jn!ny02kml__'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-ALLOWED_HOSTS = ['*']  # For starters, tighten this later
-DEBUG = False  # Important for production!
+ALLOWED_HOSTS = ['*']
+DEBUG = False
 STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 # Application definition
 
@@ -90,15 +91,18 @@ AUTH_USER_MODEL = 'main_body.User'
 # Database
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'db.sqlite3',
+#     }
+# }
+
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
+    'default': dj_database_url.config(default='sqlite:///db.sqlite3')
 }
 
- 
-# Password validation 
+# Password validation
 # https://docs.djangoproject.com/en/5.2/ref/settings/#auth-password-validators
 
 AUTH_PASSWORD_VALIDATORS = [
@@ -117,7 +121,6 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 
-
 # Internationalization
 # https://docs.djangoproject.com/en/5.2/topics/i18n/
 
@@ -133,7 +136,7 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.2/howto/static-files/
 
-STATIC_URL = 'static/'
+STATIC_URL = '/static/'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
@@ -169,9 +172,9 @@ EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.your-email-provider.com'
 EMAIL_PORT = 587
 EMAIL_USE_TLS = True
-EMAIL_HOST_USER = 'your-email@example.com' # to TO do  
-EMAIL_HOST_PASSWORD = 'your-email-password'# to add 
-DEFAULT_FROM_EMAIL = 'your-email@example.com'# to add 
+EMAIL_HOST_USER = 'your-email@example.com'  # to TO do
+EMAIL_HOST_PASSWORD = 'your-email-password'  # to add
+DEFAULT_FROM_EMAIL = 'your-email@example.com'  # to add
 FRONTEND_URL = 'http://your-frontend-url.com'
 
 SESSION_COOKIE_AGE = 1209600  # 2 weeks in seconds
